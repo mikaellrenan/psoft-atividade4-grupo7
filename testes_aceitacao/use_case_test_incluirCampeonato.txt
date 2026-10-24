@@ -1,0 +1,25 @@
+# Testes de Aceitacao - MrBetFachada.incluirCampeonato()
+
+## Cadastro basico de campeonatos ##
+expect "CAMPEONATO ADICIONADO!" incluirCampeonato nome="Brasileirao Serie A 2023" participantes=20
+expect "CAMPEONATO ADICIONADO!" incluirCampeonato nome="Copa do Nordeste" participantes=16
+expect "CAMPEONATO ADICIONADO!" incluirCampeonato nome="Carioca" participantes=12
+
+## Validacao de campos ##
+expectError "Nao pode adicionar o vazio" incluirCampeonato nome="" participantes=10
+expectError "Nao pode adicionar o vazio" incluirCampeonato nome= participantes=8
+
+## Prevencao de duplicatas (case insensitive) ##
+incluirCampeonato nome="Paraibano" participantes=10
+expect "CAMPEONATO JA EXISTE!" incluirCampeonato nome="PARAIBANO" participantes=12
+expect "CAMPEONATO JA EXISTE!" incluirCampeonato nome="paraibano" participantes=8
+
+## Validacao de participantes ##
+expect "CAMPEONATO ADICIONADO!" incluirCampeonato nome="Mundial" participantes=1
+expect "CAMPEONATO ADICIONADO!" incluirCampeonato nome="Libertadores" participantes=100
+expect "CAMPEONATO ADICIONADO!" incluirCampeonato nome="Campeonato Invalido" participantes=0
+expect "CAMPEONATO ADICIONADO!" incluirCampeonato nome="Outro Invalido" participantes=-1
+
+## Testes com formatos especiais ##
+expect "CAMPEONATO ADICIONADO!" incluirCampeonato nome="Campeonato @Especial 2023!" participantes=15
+expect "CAMPEONATO ADICIONADO!" incluirCampeonato nome="Copa do Mundo 2026" participantes=48

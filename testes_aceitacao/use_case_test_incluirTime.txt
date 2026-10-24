@@ -1,0 +1,28 @@
+# Testes de Aceitacao - MrBetFachada.incluirTime()
+
+## Cadastro basico de times ##
+
+expect "INCLUSAO REALIZADA!" incluirTime codigo="250_PB" nome="Campinense" mascote="Raposa"
+expect "INCLUSAO REALIZADA!" incluirTime codigo="252_PB" nome="Treze" mascote="Galo"
+expect "INCLUSAO REALIZADA!" incluirTime codigo="002_RJ" nome="Flamengo" mascote="Urubu"
+expect "INCLUSAO REALIZADA!" incluirTime codigo="001_SP" nome="Corinthians" mascote="Gaviao"
+
+## Validacao de campos obrigatorios ##
+
+expectError "Nao pode adicionar o vazio" incluirTime codigo="" nome="Botafogo" mascote="Manequinho"
+expectError "Nao pode adicionar o vazio" incluirTime codigo= nome="Botafogo" mascote="Manequinho"
+expectError "Nao pode adicionar o vazio" incluirTime codigo="005_RJ" nome="" mascote="Manequinho"
+expectError "Nao pode adicionar o vazio" incluirTime codigo="005_RJ" nome= mascote="Manequinho"
+expectError "Nao pode adicionar o vazio" incluirTime codigo="005_RJ" nome="Botafogo" mascote=""
+expectError "Nao pode adicionar o vazio" incluirTime codigo="005_RJ" nome="Botafogo" mascote=
+
+## Prevencao de duplicatas ##
+
+incluirTime codigo="100_RS" nome="Gremio" mascote="Mosqueteiro"
+expect "TIME JA EXISTE!" incluirTime codigo="100_RS" nome="Gremio FBPA" mascote="Mosqueteiro Azul"
+
+## Testes com formatos especiais ##
+
+expect "INCLUSAO REALIZADA!" incluirTime codigo="SPC_01" nome="Sao Paulo FC" mascote="Santo Paulo"
+expect "INCLUSAO REALIZADA!" incluirTime codigo="A-1_B2" nome="Time Especial" mascote="Mascote @"
+expect "INCLUSAO REALIZADA!" incluirTime codigo="X" nome="Time X" mascote="Mascote X"

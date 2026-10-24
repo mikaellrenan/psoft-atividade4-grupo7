@@ -1,0 +1,32 @@
+# Testes de Aceitacao - MrBetFachada.verificaTimeCampeonato()
+
+## Setup inicial ##
+incluirTime codigo="250_PB" nome="Campinense" mascote="Raposa"
+incluirTime codigo="252_PB" nome="Treze" mascote="Galo"
+incluirTime codigo="255_PE" nome="Sport" mascote="Leao"
+incluirCampeonato nome="Brasileirao Serie A 2023" participantes=20
+incluirTimeCampeonato codTime="250_PB" nomeCamp="Brasileirao Serie A 2023"
+
+## Verificacao valida - Time esta no campeonato ##
+expect "O TIME ESTA NO CAMPEONATO!" verificaTimeCampeonato codTime="250_PB" nomeCamp="Brasileirao Serie A 2023"
+
+## Verificacao valida - Time nao esta no campeonato ##
+expect "O TIME NAO ESTA NO CAMPEONATO!" verificaTimeCampeonato codTime="255_PE" nomeCamp="Brasileirao Serie A 2023"
+
+## Validacao de campos vazios/nulos ##
+expectError "Nao pode adicionar o vazio" verificaTimeCampeonato codTime="" nomeCamp="Brasileirao Serie A 2023"
+expectError "Nao pode adicionar o vazio" verificaTimeCampeonato codTime= nomeCamp="Brasileirao Serie A 2023"
+expectError "Nao pode adicionar o vazio" verificaTimeCampeonato codTime="250_PB" nomeCamp=""
+expectError "Nao pode adicionar o vazio" verificaTimeCampeonato codTime="250_PB" nomeCamp=
+
+## Verificacao de existencia ##
+expectError "O TIME NAO EXISTE!" verificaTimeCampeonato codTime="999_XX" nomeCamp="Brasileirao Serie A 2023"
+expectError "O CAMPEONATO NAO EXISTE!" verificaTimeCampeonato codTime="250_PB" nomeCamp="Campeonato Inexistente"
+
+## Teste com campeonato vazio ##
+incluirCampeonato nome="Copa do Brasil" participantes=10
+expect "O TIME NAO ESTA NO CAMPEONATO!" verificaTimeCampeonato codTime="250_PB" nomeCamp="Copa do Brasil"
+
+## Teste com multiplos times ##
+incluirTimeCampeonato codTime="252_PB" nomeCamp="Brasileirao Serie A 2023"
+expect "O TIME ESTA NO CAMPEONATO!" verificaTimeCampeonato codTime="252_PB" nomeCamp="Brasileirao Serie A 2023"

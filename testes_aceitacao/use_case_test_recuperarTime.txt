@@ -1,0 +1,27 @@
+# Testes de Aceitacao - MrBetFachada.recuperarTime()
+
+## Pre-cadastro de times para testes ##
+incluirTime codigo="250_PB" nome="Campinense" mascote="Raposa"
+incluirTime codigo="252_PB" nome="Treze" mascote="Galo"
+incluirTime codigo="002_RJ" nome="Flamengo" mascote="Urubu"
+
+## Recuperacao valida ##
+expect "[250_PB] Campinense / Raposa" recuperarTime codigo="250_PB"
+expect "[252_PB] Treze / Galo" recuperarTime codigo="252_PB"
+expect "[002_RJ] Flamengo / Urubu" recuperarTime codigo="002_RJ"
+
+## Validacao de codigo invalido ##
+expectError "Nao pode adicionar o vazio" recuperarTime codigo=""
+expectError "Nao pode adicionar o vazio" recuperarTime codigo=
+
+## Time nao existente ##
+expect "TIME NAO EXISTE!" recuperarTime codigo="999_XX"
+expect "TIME NAO EXISTE!" recuperarTime codigo="INVALIDO"
+
+## Testes apos modificacoes ##
+incluirTime codigo="001_SP" nome="Corinthians" mascote="Gaviao"
+expect "[001_SP] Corinthians / Gaviao" recuperarTime codigo="001_SP"
+
+## Testes com codigos especiais ##
+incluirTime codigo="SPC_@1" nome="Sao Paulo" mascote="Santo"
+expect "[SPC_@1] Sao Paulo / Santo" recuperarTime codigo="SPC_@1"

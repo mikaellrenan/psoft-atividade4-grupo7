@@ -1,0 +1,34 @@
+# Testes de Aceitacao - MrBetFachada.incluirTimeCampeonato()
+
+## Setup inicial ##
+incluirTime codigo="250_PB" nome="Campinense" mascote="Raposa"
+incluirTime codigo="252_PB" nome="Treze" mascote="Galo"
+incluirTime codigo="001_SP" nome="Corinthians" mascote="Gaviao"
+incluirCampeonato nome="Brasileirao Serie A 2023" participantes=2
+incluirCampeonato nome="Copa do Nordeste" participantes=1
+
+## Inclusao valida ##
+expect "TIME INCLUIDO NO CAMPEONATO!" incluirTimeCampeonato codTime="250_PB" nomeCamp="Brasileirao Serie A 2023"
+expect "TIME INCLUIDO NO CAMPEONATO!" incluirTimeCampeonato codTime="252_PB" nomeCamp="Brasileirao Serie A 2023"
+
+## Validacao de campos ##
+expectError "Nao pode adicionar o vazio" incluirTimeCampeonato codTime="" nomeCamp="Brasileirao Serie A 2023"
+expectError "Nao pode adicionar o vazio" incluirTimeCampeonato codTime= nomeCamp="Brasileirao Serie A 2023"
+expectError "Nao pode adicionar o vazio" incluirTimeCampeonato codTime="250_PB" nomeCamp=""
+expectError "Nao pode adicionar o vazio" incluirTimeCampeonato codTime="250_PB" nomeCamp=
+
+## Verificacao de existencia ##
+expectError "O TIME NAO EXISTE!" incluirTimeCampeonato codTime="999_XX" nomeCamp="Brasileirao Serie A 2023"
+expectError "CAMPEONATO NAO EXISTE!" incluirTimeCampeonato codTime="250_PB" nomeCamp="Campeonato Inexistente"
+
+## Controle de duplicatas ##
+expect "O TIME JA FOI INCLUIDO ANTERIORMENTE!" incluirTimeCampeonato codTime="250_PB" nomeCamp="Brasileirao Serie A 2023"
+
+## Testes com nomes exatos (sem case insensitive) ##
+# Novo campeonato para testes específicos
+incluirCampeonato nome="Campeonato Exato" participantes=2
+# Teste com nome exatamente igual ao cadastrado
+expect "TIME INCLUIDO NO CAMPEONATO!" incluirTimeCampeonato codTime="252_PB" nomeCamp="Campeonato Exato"
+# Teste com nome diferente (deve falhar)
+expectError "CAMPEONATO NAO EXISTE!" incluirTimeCampeonato codTime="250_PB" nomeCamp="CAMPEONATO EXATO"
+expectError "CAMPEONATO NAO EXISTE!" incluirTimeCampeonato codTime="250_PB" nomeCamp="campeonato exato"

@@ -1,0 +1,39 @@
+# Testes de Aceitacao - MrBetFachada.campsParticipando()
+
+## Setup inicial ##
+incluirTime codigo="299_PB" nome="Sao Paulo" mascote="Raposa"
+incluirTime codigo="288_PB" nome="Corinthians" mascote="Galo"
+incluirTime codigo="277_SP" nome="Palmeiras" mascote="Gaviao"
+
+# Campeonatos onde o time participa
+incluirCampeonato nome="La Liga" participantes=20
+incluirCampeonato nome="Ligue 1" participantes=16
+incluirCampeonato nome="Paraibano" participantes=12
+incluirTimeCampeonato codTime="299_PB" nomeCamp="La Liga"
+incluirTimeCampeonato codTime="299_PB" nomeCamp="Ligue 1"
+
+# Campeonato sem times
+incluirCampeonato nome="Carioca" participantes=10
+
+## Time em multiplos campeonatos ##
+expect "Time: 299_PB | Campeonatos do Sao Paulo | * Ligue 1 - 1/16 | * La Liga - 1/20" campsParticipando codTime="299_PB"
+
+## Time sem participacao ##
+expect "O TIME NAO ESTA EM NENHUM CAMPEONATO!" campsParticipando codTime="288_PB"
+expect "O TIME NAO ESTA EM NENHUM CAMPEONATO!" campsParticipando codTime="001_SP"
+
+## Validacao de campos ##
+expectError "Nao pode adicionar o vazio" campsParticipando codTime=""
+expectError "Nao pode adicionar o vazio" campsParticipando codTime=
+
+## Verificacao de existencia ##
+expectError "O TIME NAO EXISTE!" campsParticipando codTime="999_XX"
+
+## Teste apos nova inclusao ##
+incluirCampeonato nome="Copa do Mundo" participantes=32
+incluirTimeCampeonato codTime="288_PB" nomeCamp="Copa do Mundo"
+expect "Time: 288_PB | Campeonatos do Corinthians | * Copa do Mundo - 1/32" campsParticipando codTime="288_PB"
+
+## Teste com time unico em um campeonato ##
+incluirTimeCampeonato codTime="277_SP" nomeCamp="Copa do Mundo"
+expect "Time: 277_SP | Campeonatos do Palmeiras | * Copa do Mundo - 2/32" campsParticipando codTime="277_SP"

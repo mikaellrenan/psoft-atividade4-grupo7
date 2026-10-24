@@ -1,0 +1,45 @@
+# Testes de Aceitacao - tentarSorte()
+
+## Set-up inicial ##
+# Cadastrando times necessários
+incluirTime codigo="250_PB" nome="Campinense" mascote="Raposa"
+incluirTime codigo="252_PB" nome="Treze" mascote="Galo"
+
+# Cadastrando campeonatos necessarios
+incluirCampeonato nome="Brasileirao Serie A 2023" participantes=20
+incluirCampeonato nome="Copa do Nordeste 2023" participantes=10
+
+# Incluindo times nos campeonatos
+incluirTimeCampeonato codigo="250_PB" campeonato="Copa do Nordeste 2023"
+incluirTimeCampeonato codigo="252_PB" campeonato="Brasileirao Serie A 2023"
+
+## Casos de sucesso ##
+expect "APOSTA REGISTRADA!" tentarSorte codTime="250_PB" nomeCamp="Copa do Nordeste 2023" colocacao=1 preco=100.0
+expect "APOSTA REGISTRADA!" tentarSorte codTime="250_PB" nomeCamp="Copa do Nordeste 2023" colocacao=10 preco=50.0
+expect "APOSTA REGISTRADA!" tentarSorte codTime="252_PB" nomeCamp="Brasileirao Serie A 2023" colocacao=5 preco=200.0
+
+## Casos de erro ##
+# Time nao existe
+expectError "O TIME NAO EXISTE!" tentarSorte codTime="999_XX" nomeCamp="Brasileirao Serie A 2023" colocacao=1 preco=100.0
+
+# Campeonato nao existe
+expectError "CAMPEONATO NAO EXISTE!" tentarSorte codTime="250_PB" nomeCamp="Campeonato Inexistente" colocacao=1 preco=100.0
+
+# Colocacao invalida (acima do limite)
+expect "APOSTA NAO REGISTRADA!" tentarSorte codTime="250_PB" nomeCamp="Copa do Nordeste 2023" colocacao=11 preco=100.0
+
+# Colocação invalida (abaixo do limite)
+expect "APOSTA NAO REGISTRADA!" tentarSorte codTime="250_PB" nomeCamp="Copa do Nordeste 2023" colocacao=0 preco=100.0
+
+# Time nao esta no campeonato
+expect "O TIME NAO ESTA NO CAMPEONATO!" tentarSorte codTime="252_PB" nomeCamp="Copa do Nordeste 2023" colocacao=1 preco=100.0
+
+# Valores vazios/nulos
+expectError "Nao pode adicionar o vazio" tentarSorte codTime="" nomeCamp="Copa do Nordeste 2023" colocacao=1 preco=100.0
+expectError "Nao pode adicionar o vazio" tentarSorte codTime= nomeCamp="Copa do Nordeste 2023" colocacao=1 preco=100.0
+expectError "Nao pode adicionar o vazio" tentarSorte codTime="250_PB" nomeCamp="" colocacao=1 preco=100.0
+expectError "Nao pode adicionar o vazio" tentarSorte codTime="250_PB" nomeCamp= colocacao=1 preco=100.0
+
+# Valores extremos
+expect "APOSTA REGISTRADA!" tentarSorte codTime="250_PB" nomeCamp="Copa do Nordeste 2023" colocacao=1 preco=0.01
+expect "APOSTA REGISTRADA!" tentarSorte codTime="250_PB" nomeCamp="Copa do Nordeste 2023" colocacao=10 preco=999999.99
