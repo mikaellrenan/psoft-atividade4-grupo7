@@ -2,52 +2,43 @@ package mrbet;
 
 import java.util.Objects;
 
-/**
- * Representa uma aposta realizada em um determinado campeonato para um time especÌfico.
- * Cada aposta guarda as informaÁıes do time, campeonato, colocaÁ„o prevista e valor da aposta.
- * 
- * @author Mikael Renan de Oliveira
- * 
- */
 public class Aposta {
+    // Vari√°vel privada que armazena o objeto time da aposta
     private Time time;
+    // Vari√°vel privada que armazena o campeonato associado
     private Campeonato campeonato;
+    // Vari√°vel que guarda a coloca√ß√£o prevista
     private String colocacao;
+    // Vari√°vel que guarda o valor em string
     private String valor;
 
-    /**
-     * ConstrÛi uma aposta.
-     *
-     * @param time       o time associado ‡ aposta.
-     * @param campeonato o campeonato no qual a aposta È feita.
-     * @param colocacao  a colocaÁ„o prevista para o time.
-     * @param valor      o valor da aposta.
-     */
+    // Construtor padr√£o da classe Aposta para inicializar os atributos
     public Aposta(Time time, Campeonato campeonato, String colocacao, String valor) {
+        // Atribui o time recebido
         this.time = time;
+        // Atribui o campeonato recebido
         this.campeonato = campeonato;
+        // Atribui a coloca√ß√£o
         this.colocacao = colocacao;
+        // Atribui o valor
         this.valor = valor;
     }
 
-    /**
-     * @return o time da aposta.
-     */
+    // M√©todo get para retornar o time
     public Time getTime() {
+        // Retorna a vari√°vel time
         return time;
     }
 
-    /**
-     * @return a colocaÁ„o prevista na aposta.
-     */
+    // M√©todo get para retornar a coloca√ß√£o
     public String getColocacao() {
+        // Retorna a coloca√ß√£o
         return colocacao;
     }
 
-    /**
-     * @return o valor da aposta.
-     */
+    // M√©todo get para retornar o valor
     public String getValor() {
+        // Retorna o valor
         return valor;
     }
 
@@ -67,12 +58,9 @@ public class Aposta {
         return Objects.hash(time, campeonato, colocacao, valor);
     }
 
-    /**
-     * RepresentaÁ„o textual da aposta.
-     * Exemplo: [001] Flamengo / Urubu | Brasileirao - 1/20 | R$1000.0
-     */
     @Override
     public String toString() {
+        // Formata a string de exibi√ß√£o da aposta
         return String.format("%s | %s - %s/%d | R$%s",
                 time.toString(),
                 campeonato.getNomeCampeonato(),
