@@ -4,18 +4,33 @@ import java.util.*;
 
 /**
  * Controlador principal do sistema MrBet.
- * Gerencia os times, campeonatos e apostas, oferecendo os métodos de manipulação.
+ * Gerencia os times, campeonatos e apostas, oferecendo os mï¿½todos de manipulaï¿½ï¿½o.
  * 
  * @author Mikael Renan de Oliveira
  * 
  */
+
+/**
+ *  CODE SMELL IDENTIFICADO: DIVERGENT CHANGE
+ *  A classe possui mÃºltiplos motivos para ser modificada, pois manipula 
+ *  diretamente o ciclo de vida e as regras de negÃ³cio de trÃªs domÃ­nios 
+ *  distintos (Times, Campeonatos e Apostas). Esse comportamento
+ *  Ã© conhecido por classe GOD CLASS.
+ *
+ *  SOLUÃ‡ÃƒO PARA DIVERGENT CHANGE
+ *  EXTRACT CLASS ou extraÃ§Ã£o de classes, devemos dividir esta classe para que 
+ *  suas manipulaÃ§Ãµes sejam limitadas a dominios individuais deixando a  regra
+ *  mais clara e reduzindo o acoplamento e aumentando a coesÃ£o. CriaÃ§Ã£o de nova classe TimesController,
+ *  CampeonatoController e ApostasController.
+ * 
+*/
 public class MrBetController {
     private Map<String, Time> times;
     private Map<String, Campeonato> campeonatos;
     private List<Aposta> apostas;
 
     /**
-     * Constrói o controlador do sistema MrBet.
+     * Constrï¿½i o controlador do sistema MrBet.
      */
     public MrBetController() {
         this.times = new HashMap<>();
@@ -39,7 +54,7 @@ public class MrBetController {
     }
 
     /**
-     * Recupera a representação de um time.
+     * Recupera a representaï¿½ï¿½o de um time.
      *
      * @param id identificador do time.
      * @return string do time ou mensagem de erro.
@@ -68,7 +83,7 @@ public class MrBetController {
      *
      * @param idTime   identificador do time.
      * @param nomeCamp nome do campeonato.
-     * @return mensagem de resultado da operação.
+     * @return mensagem de resultado da operaï¿½ï¿½o.
      */
     public String incluirTimeCampeonato(String idTime, String nomeCamp) {
         if (!times.containsKey(idTime)) return "O TIME NAO EXISTE!";
@@ -90,7 +105,7 @@ public class MrBetController {
      *
      * @param idTime   id do time.
      * @param nomeCamp nome do campeonato.
-     * @return mensagem de verificação.
+     * @return mensagem de verificaï¿½ï¿½o.
      */
     public String verificaTimeCampeonato(String idTime, String nomeCamp) {
         if (!times.containsKey(idTime)) return "O TIME NAO EXISTE!";
@@ -128,7 +143,7 @@ public class MrBetController {
      *
      * @param idTime   id do time.
      * @param nomeCamp nome do campeonato.
-     * @param colocacao colocação prevista.
+     * @param colocacao colocaï¿½ï¿½o prevista.
      * @param valor     valor da aposta.
      * @return mensagem de resultado.
      */
