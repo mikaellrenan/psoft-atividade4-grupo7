@@ -2,27 +2,12 @@ package mrbet;
 
 import java.util.Objects;
 
-/**
- * Representa uma aposta realizada em um determinado campeonato para um time específico.
- * Cada aposta guarda as informações do time, campeonato, colocação prevista e valor da aposta.
- * 
- * @author Mikael Renan de Oliveira
- * 
- */
 public class Aposta {
     private Time time;
     private Campeonato campeonato;
     private String colocacao;
     private String valor;
 
-    /**
-     * Constrói uma aposta.
-     *
-     * @param time       o time associado à aposta.
-     * @param campeonato o campeonato no qual a aposta é feita.
-     * @param colocacao  a colocação prevista para o time.
-     * @param valor      o valor da aposta.
-     */
     public Aposta(Time time, Campeonato campeonato, String colocacao, String valor) {
         this.time = time;
         this.campeonato = campeonato;
@@ -30,23 +15,14 @@ public class Aposta {
         this.valor = valor;
     }
 
-    /**
-     * @return o time da aposta.
-     */
     public Time getTime() {
         return time;
     }
 
-    /**
-     * @return a colocação prevista na aposta.
-     */
     public String getColocacao() {
         return colocacao;
     }
 
-    /**
-     * @return o valor da aposta.
-     */
     public String getValor() {
         return valor;
     }
@@ -67,10 +43,6 @@ public class Aposta {
         return Objects.hash(time, campeonato, colocacao, valor);
     }
 
-    /**
-     * Representação textual da aposta.
-     * Exemplo: [001] Flamengo / Urubu | Brasileirao - 1/20 | R$1000.0
-     */
     @Override
     public String toString() {
         return String.format("%s | %s - %s/%d | R$%s",
