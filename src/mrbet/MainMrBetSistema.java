@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 /**
  * Classe principal que fornece uma interface de linha de comando interativa
- * para o sistema MrBet. Permite aos usu·rios interagir com todas as funcionalidades
- * do sistema atravÈs de um menu textual.
+ * para o sistema MrBet. Permite aos usu√°rios interagir com todas as funcionalidades
+ * do sistema atrav√©s de um menu textual.
  * 
  * @author Mikael Renan de Oliveira
  * 
@@ -13,10 +13,10 @@ import java.util.Scanner;
 public class MainMrBetSistema {
     
     /**
-     * MÈtodo principal que inicia a aplicaÁ„o MrBet.
+     * M√©todo principal que inicia a aplica√ß√£o MrBet.
      * Cria o controlador do sistema e inicia o loop principal do menu.
      * 
-     * @param args Argumentos de linha de comando (n„o utilizados)
+     * @param args Argumentos de linha de comando (n√£o utilizados)
      */
     public static void main(String[] args) {
         MrBetController sistema = new MrBetController();
@@ -24,12 +24,12 @@ public class MainMrBetSistema {
         
         System.out.println("=== SISTEMA MRBET ===");
         
-        // Loop principal da aplicaÁ„o
+        // Loop principal da aplica√ß√£o
         while (true) {
             printMenu();
             String option = scanner.nextLine().toUpperCase();
             
-            // Processa a opÁ„o selecionada pelo usu·rio
+            // Processa a op√ß√£o selecionada pelo usu√°rio
             switch (option) {
                 case "M":
                     incluirTime(sistema, scanner);
@@ -53,37 +53,37 @@ public class MainMrBetSistema {
                     sairPrograma(scanner);
                     return;
                 default:
-                    System.out.println("OP«√O INV¡LIDA!");
+                    System.out.println("OP√á√ÉO INV√ÅLIDA!");
             }
         }
     }
     
     /**
-     * Exibe o menu principal do sistema MrBet com todas as opÁıes disponÌveis.
-     * O menu segue o padr„o especificado no documento de requisitos.
+     * Exibe o menu principal do sistema MrBet com todas as op√ß√µes dispon√≠veis.
+     * O menu segue o padr√£o especificado no documento de requisitos.
      */
     private static void printMenu() {
         System.out.println("\n=== MENU MRBET ===");
-        System.out.println("(M) Minha inclus„o de times");
+        System.out.println("(M) Minha inclus√£o de times");
         System.out.println("(R) Recuperar time");
         System.out.println("(.) Adicionar campeonato");
         System.out.println("(B) Bora incluir time em campeonato e Verificar");
         System.out.println("(E) Exibir campeonatos que o time participa");
         System.out.println("(T) Tentar a sorte e status");
-        System.out.println("(!) J· pode fechar o programa!");
-        System.out.print("OpÁ„o> ");
+        System.out.println("(!) J√° pode fechar o programa!");
+        System.out.print("Op√ß√£o> ");
     }
     
     /**
-     * Processa a inclus„o de um novo time no sistema.
-     * Solicita cÛdigo, nome e mascote do time ao usu·rio.
+     * Processa a inclus√£o de um novo time no sistema.
+     * Solicita c√≥digo, nome e mascote do time ao usu√°rio.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
-     * @param scanner Scanner para entrada de dados do usu·rio
+     * @param sistema Inst√¢ncia do controlador MrBet
+     * @param scanner Scanner para entrada de dados do usu√°rio
      */
     private static void incluirTime(MrBetController sistema, Scanner scanner) {
         System.out.println("\n--- INCLUIR TIME ---");
-        System.out.print("CÛdigo: ");
+        System.out.print("C√≥digo: ");
         String codigo = scanner.nextLine();
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
@@ -95,15 +95,15 @@ public class MainMrBetSistema {
     }
     
     /**
-     * Processa a recuperaÁ„o de informaÁıes de um time existente.
-     * Solicita o cÛdigo do time a ser recuperado.
+     * Processa a recupera√ß√£o de informa√ß√µes de um time existente.
+     * Solicita o c√≥digo do time a ser recuperado.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
-     * @param scanner Scanner para entrada de dados do usu·rio
+     * @param sistema Inst√¢ncia do controlador MrBet
+     * @param scanner Scanner para entrada de dados do usu√°rio
      */
     private static void recuperarTime(MrBetController sistema, Scanner scanner) {
         System.out.println("\n--- RECUPERAR TIME ---");
-        System.out.print("CÛdigo: ");
+        System.out.print("C√≥digo: ");
         String codigo = scanner.nextLine();
         
         String resultado = sistema.recuperarTime(codigo);
@@ -111,37 +111,37 @@ public class MainMrBetSistema {
     }
     
     /**
-     * Processa a adiÁ„o de um novo campeonato ao sistema.
-     * Solicita nome e n˙mero de participantes do campeonato.
+     * Processa a adi√ß√£o de um novo campeonato ao sistema.
+     * Solicita nome e n√∫mero de participantes do campeonato.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
-     * @param scanner Scanner para entrada de dados do usu·rio
+     * @param sistema Inst√¢ncia do controlador MrBet
+     * @param scanner Scanner para entrada de dados do usu√°rio
      */
     private static void adicionarCampeonato(MrBetController sistema, Scanner scanner) {
         System.out.println("\n--- ADICIONAR CAMPEONATO ---");
         System.out.print("Nome do campeonato: ");
         String nome = scanner.nextLine();
-        System.out.print("N˙mero de participantes: ");
+        System.out.print("N√∫mero de participantes: ");
         
         try {
             int participantes = Integer.parseInt(scanner.nextLine());
             String resultado = sistema.incluirCampeonato(nome, participantes);
             System.out.println(resultado);
         } catch (NumberFormatException e) {
-            System.out.println("N⁄MERO DE PARTICIPANTES INV¡LIDO!");
+            System.out.println("N√öMERO DE PARTICIPANTES INV√ÅLIDO!");
         }
     }
     
     /**
-     * Gerencia as operaÁıes relacionadas a times e campeonatos.
-     * Oferece subopÁıes para incluir time em campeonato ou verificar participaÁ„o.
+     * Gerencia as opera√ß√µes relacionadas a times e campeonatos.
+     * Oferece subop√ß√µes para incluir time em campeonato ou verificar participa√ß√£o.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
-     * @param scanner Scanner para entrada de dados do usu·rio
+     * @param sistema Inst√¢ncia do controlador MrBet
+     * @param scanner Scanner para entrada de dados do usu√°rio
      */
     private static void timeCampeonatoOperations(MrBetController sistema, Scanner scanner) {
-        System.out.println("\n--- OPERA«’ES TIME/CAMPEONATO ---");
-        System.out.print("(I) Incluir time em campeonato ou (V) Verificar se time est· em campeonato? ");
+        System.out.println("\n--- OPERA√á√ïES TIME/CAMPEONATO ---");
+        System.out.print("(I) Incluir time em campeonato ou (V) Verificar se time est√° em campeonato? ");
         String opcao = scanner.nextLine().toUpperCase();
         
         if (opcao.equals("I")) {
@@ -149,20 +149,20 @@ public class MainMrBetSistema {
         } else if (opcao.equals("V")) {
             verificarTimeCampeonato(sistema, scanner);
         } else {
-            System.out.println("OP«√O INV¡LIDA!");
+            System.out.println("OP√á√ÉO INV√ÅLIDA!");
         }
     }
     
     /**
-     * Processa a inclus„o de um time em um campeonato existente.
-     * Solicita cÛdigo do time e nome do campeonato.
+     * Processa a inclus√£o de um time em um campeonato existente.
+     * Solicita c√≥digo do time e nome do campeonato.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
-     * @param scanner Scanner para entrada de dados do usu·rio
+     * @param sistema Inst√¢ncia do controlador MrBet
+     * @param scanner Scanner para entrada de dados do usu√°rio
      */
     private static void incluirTimeCampeonato(MrBetController sistema, Scanner scanner) {
         System.out.println("\n--- INCLUIR TIME EM CAMPEONATO ---");
-        System.out.print("CÛdigo do time: ");
+        System.out.print("C√≥digo do time: ");
         String codTime = scanner.nextLine();
         System.out.print("Nome do campeonato: ");
         String nomeCamp = scanner.nextLine();
@@ -172,15 +172,15 @@ public class MainMrBetSistema {
     }
     
     /**
-     * Processa a verificaÁ„o se um time participa de um campeonato.
-     * Solicita cÛdigo do time e nome do campeonato.
+     * Processa a verifica√ß√£o se um time participa de um campeonato.
+     * Solicita c√≥digo do time e nome do campeonato.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
-     * @param scanner Scanner para entrada de dados do usu·rio
+     * @param sistema Inst√¢ncia do controlador MrBet
+     * @param scanner Scanner para entrada de dados do usu√°rio
      */
     private static void verificarTimeCampeonato(MrBetController sistema, Scanner scanner) {
         System.out.println("\n--- VERIFICAR TIME EM CAMPEONATO ---");
-        System.out.print("CÛdigo do time: ");
+        System.out.print("C√≥digo do time: ");
         String codTime = scanner.nextLine();
         System.out.print("Nome do campeonato: ");
         String nomeCamp = scanner.nextLine();
@@ -191,14 +191,14 @@ public class MainMrBetSistema {
     
     /**
      * Exibe todos os campeonatos em que um time participa.
-     * Solicita o cÛdigo do time.
+     * Solicita o c√≥digo do time.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
-     * @param scanner Scanner para entrada de dados do usu·rio
+     * @param sistema Inst√¢ncia do controlador MrBet
+     * @param scanner Scanner para entrada de dados do usu√°rio
      */
     private static void exibirCampeonatosTime(MrBetController sistema, Scanner scanner) {
         System.out.println("\n--- EXIBIR CAMPEONATOS DO TIME ---");
-        System.out.print("CÛdigo do time: ");
+        System.out.print("C√≥digo do time: ");
         String codigo = scanner.nextLine();
         
         String resultado = sistema.campsParticipando(codigo);
@@ -206,14 +206,14 @@ public class MainMrBetSistema {
     }
     
     /**
-     * Gerencia as operaÁıes relacionadas a apostas.
-     * Oferece subopÁıes para fazer apostas ou consultar status.
+     * Gerencia as opera√ß√µes relacionadas a apostas.
+     * Oferece subop√ß√µes para fazer apostas ou consultar status.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
-     * @param scanner Scanner para entrada de dados do usu·rio
+     * @param sistema Inst√¢ncia do controlador MrBet
+     * @param scanner Scanner para entrada de dados do usu√°rio
      */
     private static void apostasOperations(MrBetController sistema, Scanner scanner) {
-        System.out.println("\n--- OPERA«’ES DE APOSTAS ---");
+        System.out.println("\n--- OPERA√á√ïES DE APOSTAS ---");
         System.out.print("(A) Apostar ou (S) Status das Apostas? ");
         String opcao = scanner.nextLine().toUpperCase();
         
@@ -222,24 +222,24 @@ public class MainMrBetSistema {
         } else if (opcao.equals("S")) {
             exibirStatusApostas(sistema);
         } else {
-            System.out.println("OP«√O INV¡LIDA!");
+            System.out.println("OP√á√ÉO INV√ÅLIDA!");
         }
     }
     
     /**
      * Processa o registro de uma nova aposta no sistema.
-     * Solicita cÛdigo do time, campeonato, colocaÁ„o prevista e valor da aposta.
+     * Solicita c√≥digo do time, campeonato, coloca√ß√£o prevista e valor da aposta.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
-     * @param scanner Scanner para entrada de dados do usu·rio
+     * @param sistema Inst√¢ncia do controlador MrBet
+     * @param scanner Scanner para entrada de dados do usu√°rio
      */
     private static void fazerAposta(MrBetController sistema, Scanner scanner) {
         System.out.println("\n--- FAZER APOSTA ---");
-        System.out.print("CÛdigo do time: ");
+        System.out.print("C√≥digo do time: ");
         String codTime = scanner.nextLine();
         System.out.print("Nome do campeonato: ");
         String nomeCamp = scanner.nextLine();
-        System.out.print("ColocaÁ„o prevista: ");
+        System.out.print("Coloca√ß√£o prevista: ");
         
         try {
             int colocacao = Integer.parseInt(scanner.nextLine());
@@ -249,14 +249,14 @@ public class MainMrBetSistema {
             String resultado = sistema.tentarSorte(codTime, nomeCamp, colocacao, valor);
             System.out.println(resultado);
         } catch (NumberFormatException e) {
-            System.out.println("VALOR INV¡LIDO!");
+            System.out.println("VALOR INV√ÅLIDO!");
         }
     }
     
     /**
      * Exibe o status de todas as apostas registradas no sistema.
      * 
-     * @param sistema Inst‚ncia do controlador MrBet
+     * @param sistema Inst√¢ncia do controlador MrBet
      */
     private static void exibirStatusApostas(MrBetController sistema) {
         System.out.println("\n--- STATUS DAS APOSTAS ---");
@@ -265,14 +265,14 @@ public class MainMrBetSistema {
     }
     
     /**
-     * Encerra a aplicaÁ„o de forma controlada.
+     * Encerra a aplica√ß√£o de forma controlada.
      * Exibe mensagem de despedida e fecha o scanner.
      * 
      * @param scanner Scanner a ser fechado
      */
     private static void sairPrograma(Scanner scanner) {
         System.out.println("\n=== ENCERRANDO SISTEMA MRBET ===");
-        System.out.println("Por hoje È sÛ, pessoal!");
+        System.out.println("Por hoje √© s√≥, pessoal!");
         scanner.close();
     }
 }
